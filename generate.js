@@ -1,7 +1,7 @@
 const fsExtra = require('fs-extra');
 const { writeJson } = require('fs-extra');
 const input_path = './in/';
-const output_path = './out1/';
+const output_path = './out/';
 const description = "Girles NFT Are A Group Of 1000 Uniquely Designed And Generated Collectibles On The Ethereum Blockchain.";
 
 if (!fsExtra.existsSync(output_path)) {
@@ -14,15 +14,6 @@ for (let i = 0; i < 10000; i++) {
       console.log('An error has occurred when reading json');
       return;
     }
-    let newData = {
-      name: data.name,
-      description: description,
-      image: `https://sapphire-decent-kingfisher-144.mypinata.cloud/ipfs/QmWzjPBLZCNFTFRGH2jktmcmcgHgdrsYcgVhMSE84G14j6/${i+1}.png`,
-      dna: data.dna,
-      edition: data.edition,
-      date: data.date,
-      attributes: data.attributes
-    };
 
     let obj = new Object();
     obj.name = data.name;
@@ -34,7 +25,6 @@ for (let i = 0; i < 10000; i++) {
     obj.attributes = data.attributes;
 
     var string = JSON.stringify(obj);
-    console.log(JSON.parse(string));
 
     writeJson(`${output_path}${i+1}.json`, JSON.parse(string), (error) => {
       if (error) {
